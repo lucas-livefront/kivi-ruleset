@@ -1,4 +1,4 @@
-KiviRuleset:
+KiviRuleSet:
   FunctionParameterNewLines:
     active: true
     maxArgumentsOnOneLine: 2

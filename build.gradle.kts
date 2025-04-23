@@ -6,19 +6,8 @@ plugins {
     signing
 }
 
-group = "org.example.detekt"
 version = "1.0-SNAPSHOT"
-
-/**
- * Loads local build specified properties.
- */
-val Project.buildProperties
-    get() = Properties().apply {
-        val buildPropertiesFile = rootProject.file("build.properties")
-        if (buildPropertiesFile.exists()) {
-            FileInputStream(buildPropertiesFile).use { load(it) }
-        }
-    }
+group = "io.github.lucas-livefront"
 
 dependencies {
     compileOnly("io.gitlab.arturbosch.detekt:detekt-api:1.23.8")

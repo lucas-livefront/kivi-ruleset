@@ -1,4 +1,4 @@
-package org.example.detekt.rules
+package io.github.lucas.livefront.rules
 
 import io.gitlab.arturbosch.detekt.rules.KotlinCoreEnvironmentTest
 import io.gitlab.arturbosch.detekt.test.TestConfig
