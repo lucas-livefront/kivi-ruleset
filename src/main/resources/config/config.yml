@@ -1,3 +1,5 @@
-MyRuleSet:
-  MyRule:
+KiviRuleset:
+  FunctionParameterNewLines:
     active: true
+    maxArgumentsOnOneLine: 2
+    blacklist: []

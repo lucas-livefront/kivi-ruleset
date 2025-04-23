@@ -3,6 +3,7 @@ package org.example.detekt
 import io.gitlab.arturbosch.detekt.api.Config
 import io.gitlab.arturbosch.detekt.api.RuleSet
 import io.gitlab.arturbosch.detekt.api.RuleSetProvider
+import org.example.detekt.rules.FunctionParameterNewLines
 
 class MyRuleSetProvider : RuleSetProvider {
     override val ruleSetId: String = "MyRuleSet"
@@ -11,7 +12,7 @@ class MyRuleSetProvider : RuleSetProvider {
         return RuleSet(
             ruleSetId,
             listOf(
-                MyRule(config),
+                FunctionParameterNewLines(config),
             ),
         )
     }
