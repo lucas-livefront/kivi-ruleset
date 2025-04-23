@@ -1,9 +1,8 @@
-import java.io.FileInputStream
-import java.util.Properties
+import com.vanniktech.maven.publish.SonatypeHost
 
 plugins {
     kotlin("jvm") version "2.1.20"
-    `maven-publish`
+    id("com.vanniktech.maven.publish") version "0.31.0"
     signing
 }
 
@@ -40,51 +39,41 @@ tasks.withType<Test>().configureEach {
     systemProperty("compile-snippet-tests", project.hasProperty("compile-test-snippets"))
 }
 
-publishing {
-    publications {
-        create<MavenPublication>("mavenJava") {
-            from(components["java"])
-            pom {
-                name = "kivi-ruleset"
-                description = "Detekt Rules by Kivi"
-                url = "https://github.com/lucas-livefront/kivi-ruleset"
-                inceptionYear = "2025"
 
-                licenses {
-                    license {
-                        name = "The Apache License, Version 2.0"
-                        distribution = "repo"
-                        url = "https://www.apache.org/licenses/LICENSE-2.0.txt"
-                    }
-                }
+mavenPublishing {
+    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
 
-                developers {
-                    developer {
-                        id = "lucas-livefront"
-                        name = "Lucas"
-                    }
-                }
+    pom {
+        name = "kivi-ruleset"
+        description = "Detekt Rules by Kivi"
+        url = "https://github.com/lucas-livefront/kivi-ruleset"
+        inceptionYear = "2025"
 
-                scm {
-                    connection = "scm:git:git://github.com/lucas-livefront/kivi-ruleset.git"
-                    url = "https://github.com/lucas-livefront/kivi-ruleset"
-                }
+        licenses {
+            license {
+                name = "The Apache License, Version 2.0"
+                distribution = "repo"
+                url = "https://www.apache.org/licenses/LICENSE-2.0.txt"
             }
         }
-    }
 
-    repositories {
-        maven {
-            url = uri("https://oss.sonatype.org/service/local/staging/deploy/maven2")
-            credentials {
-                username = buildProperties.getProperty("sonatype.username")
-                password = buildProperties.getProperty("sonatype.password")
+        developers {
+            developer {
+                id = "lucas-livefront"
+                name = "Lucas"
             }
+        }
+
+        scm {
+            connection = "scm:git:git://github.com/lucas-livefront/kivi-ruleset.git"
+            url = "https://github.com/lucas-livefront/kivi-ruleset"
         }
     }
 }
 
 signing {
-    useGpgCmd()
-    sign(publishing.publications["mavenJava"])
+    useInMemoryPgpKeys(
+        findProperty("signing.inMemoryKey")?.toString(),
+        findProperty("signing.password")?.toString(),
+    )
 }
