@@ -3,11 +3,10 @@ import com.vanniktech.maven.publish.SonatypeHost
 plugins {
     kotlin("jvm") version "2.1.20"
     id("com.vanniktech.maven.publish") version "0.31.0"
-    signing
 }
 
-version = "1.0-SNAPSHOT"
 group = "io.github.lucas-livefront"
+version = "1.0.3"
 
 dependencies {
     compileOnly("io.gitlab.arturbosch.detekt:detekt-api:1.23.8")
@@ -31,6 +30,8 @@ tasks.withType<Test>().configureEach {
 
 mavenPublishing {
     publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
+    signAllPublications()
+    coordinates("io.github.lucas-livefront", "kivi-ruleset", "1.0.3")
 
     pom {
         name = "kivi-ruleset"
@@ -58,11 +59,4 @@ mavenPublishing {
             url = "https://github.com/lucas-livefront/kivi-ruleset"
         }
     }
-}
-
-signing {
-    useInMemoryPgpKeys(
-        findProperty("signing.inMemoryKey")?.toString(),
-        findProperty("signing.password")?.toString(),
-    )
 }
