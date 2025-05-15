@@ -2,7 +2,7 @@ import com.vanniktech.maven.publish.SonatypeHost
 
 plugins {
     kotlin("jvm") version "2.1.20"
-    id("com.vanniktech.maven.publish") version "0.31.0"
+    id("com.vanniktech.maven.publish") version "0.32.0"
 }
 
 group = "io.github.lucas-livefront"
